@@ -38,3 +38,12 @@ SELECT  IDUSUARIO, IDGRUPO,LOGIN, SENHAUSUARIO, NOMEUSUARIO,DTALTERACAO,FLAGINAT
 
 
 --UPDATE USUARIO SET NOMEUSUARIO = 'CALUAN' WHERE IDUSUARIO = 1
+
+CREATE TABLE conta
+(
+  idconta integer NOT NULL,
+  descricao character varying(100) NOT NULL DEFAULT NULL::character varying,
+  tipoconta character varying(20) NOT NULL DEFAULT NULL::character varying,
+  valor numeric(12,2) DEFAULT 0,
+  CONSTRAINT conta_pkey PRIMARY KEY (idconta )
+)
