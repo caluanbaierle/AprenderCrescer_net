@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Caluan Baierle
@@ -70,7 +69,8 @@ public class UsuarioDao {
             sql = "INSERT INTO usuario( idusuario, idgrupo, login, "
                     + "senhausuario, nomeusuario, dtalteracao, flaginativo)"
                     + "VALUES (" + usuario.getIdUsuario()
-                    + ", 0, '" + usuario.getLogin()
+                    + ", " + usuario.getIdGrupo()
+                    + ", '" + usuario.getLogin()
                     + "' , '" + usuario.getSenha()
                     + "' , '" + usuario.getNome()
                     + "' , '" + data.toString()
@@ -119,6 +119,8 @@ public class UsuarioDao {
                 usuario.setLogin(rs.getString("LOGIN"));
                 usuario.setNome(rs.getString("NOMEUSUARIO"));
                 usuario.setSenha(rs.getString("SENHAUSUARIO"));
+                usuario.setFlagInativo(rs.getString("FLAGINATIVO").toCharArray()[0]);
+                usuario.setIdGrupo(rs.getInt("IDGRUPO"));
                 lista.add(usuario);
             }
         } catch (SQLException ex) {

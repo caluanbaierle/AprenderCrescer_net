@@ -21,11 +21,8 @@ public class MessageRestService {
     @GET
     @Path("/ret/{batatinha}")
     public Response printMessage(@PathParam("batatinha") String mensagem) {
-
         String resultado = "123 testando a vida do " + mensagem;
-
         return Response.status(200).entity(resultado).build();
-
     }
 
     @GET

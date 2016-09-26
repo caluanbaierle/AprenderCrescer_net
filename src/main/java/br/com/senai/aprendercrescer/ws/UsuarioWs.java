@@ -7,12 +7,19 @@ package br.com.senai.aprendercrescer.ws;
 
 import br.com.senai.aprendercrescer.controller.UsuarioController;
 import br.com.senai.aprendercrescer.model.Usuario;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.media.Media;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,27 +51,80 @@ public class UsuarioWs {
     @Path("/getusuarios")
     @Produces("application/json")
     public Response getAllUsuarios() {
+        // ArrayList<JSONObject> listaJson = new ArrayList<JSONObject>();
+
         try {
             UsuarioController ususarioControler;
             ususarioControler = new UsuarioController();
-            ArrayList<Usuario> lista
-                    = ususarioControler.getUsuarios();
-            JSONObject retorno = new JSONObject();
+            ArrayList<Usuario> lista = ususarioControler.getUsuarios();
+
             JSONObject jUsuario;
-            for (Usuario usuario :lista) {
+            StringBuilder retorno = new StringBuilder();
+            retorno.append("[");
+            boolean controle = false;
+            for (Usuario usuario : lista) {
+                if (controle) {
+                    retorno.append(" , ");
+                }
+
                 jUsuario = new JSONObject();
                 jUsuario.put("idUsuario", usuario.getIdUsuario());
+                jUsuario.put("idGrupo", usuario.getIdGrupo());
+                jUsuario.put("login", usuario.getLogin());
+                jUsuario.put("senha", usuario.getSenha());
                 jUsuario.put("nome", usuario.getNome());
-                retorno.put("usuario"+usuario.getIdUsuario(),
-                        jUsuario.toString());
+                jUsuario.put("flagInativo", usuario.getFlagInativo() + "");
+                retorno.append(jUsuario.toString());
+                controle = true;
             }
-          return Response.status(200).entity(retorno.toString()).build();
+
+            retorno.append("]");
+            return Response.status(200).entity(retorno.toString()).build();
         } catch (Exception ex) {
-             System.out.println("Erro:" + ex);
+            System.out.println("Erro:" + ex);
             return Response.status(200).entity(
-                    "{erro : \""+ex+"\"}").build();
-            
-           
+                    "{erro : \"" + ex + "\"}").build();
+
         }
     }
+
+    @POST
+    @Path("/setusuario")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
+    public Response setUsuario(InputStream dadosServ) {
+        StringBuilder requisicaoFinal = new StringBuilder();
+        String batata = "";
+        try {
+            BufferedReader in
+                    = new BufferedReader(
+                            new InputStreamReader(dadosServ));
+            String requisicao = null;
+            while ((requisicao = in.readLine()) != null) {
+                requisicaoFinal.append(requisicao);
+            }
+            System.out.println(requisicaoFinal.toString());
+
+            JSONObject resposta
+                    = new JSONObject(requisicaoFinal.toString());
+            Usuario usuario = new Usuario();
+
+            usuario.setLogin(resposta.getString("login"));
+            usuario.setNome(resposta.getString("nome"));
+            usuario.setSenha(resposta.getString("senha"));
+            usuario.setIdGrupo(resposta.getInt("idGrupo"));
+            usuario.setFlagInativo(resposta.getString("flagInativo").toCharArray()[0]);
+            
+            if (new UsuarioController().insereUsuario(usuario)) {
+                Response.status(200).entity("{\"result\" : \"Cadastrado com Sucesso\"}").build();
+            } else {
+                Response.status(200).entity("{\"result\" : \"Erro no Cadastro\"}").build();
+            }
+        } catch (Exception ex) {
+            return Response.status(501).
+                    entity(ex.toString()).build();
+        }
+        return null;
+    }
+
 }
