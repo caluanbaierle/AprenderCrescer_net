@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+
+        <title>Caluan Miguel Baierle</title>
+        <meta charset="utf-8">
+
+        <!-- Style -->	
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="vendor/Sweetalert/sweetalert.css">
+
+
+        <!-- Javascript Vendor -->	
+        <script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
+        <script type="text/javascript" src="vendor/angularjs/angular.js"></script>
+
+        <!-- Javascript -->	
+        <script type="text/javascript" src="js/myApp.js"></script>
+        <script type="text/javascript" src="js/controller/UsuarioController.js"></script>
+
+
+        <script type="text/javascript" src="js/factory/UsuarioService.js"></script>
+
+
+    </head>
+    <body ng-controller="UsuarioController">
+        <button  class="btn  pull-right"  ng-click="buscaUsuarios()">Atualizar</button>	
+        <div class="container">
+            <div class="col-xs-9">
+                <table class="table table-hover table-striped table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>IdGrupo</th>
+                            <th>Login</th>
+                            <th>Nome</th>
+                            <th>Ativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in dados| filter:buscar">
+                            <td>{{item.idUsuario}}</td>
+                            <td>{{item.idGrupo}}</td>
+                            <td>{{item.login}}</td>
+                            <td>{{item.nome}}</td>
+                            <td>{{item.flagInativo}}</td>
+                            <td>
+                                <button ng-click="excluirDados(item)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                <button ng-click="editarDado(item, idx)" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
