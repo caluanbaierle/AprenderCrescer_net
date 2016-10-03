@@ -35,8 +35,8 @@ public class GrupoDao {
                 + "grupo(idgrupo, tipousuario, descricaogrupo) "
                 + "VALUES((SELECT COALESCE(MAX(IDGRUPO)+1,1)"
                 + " FROM GRUPO) , "
-                + "'" + grupo.getTipousuario() + "',"
-                + "'" + grupo.getDescricaogrupo() + "')";
+                + "'" + grupo.getTipoUsuario()+ "',"
+                + "'" + grupo.getDescricaoGrupo()+ "')";
 
         try {
             System.out.println(sql);
@@ -57,9 +57,9 @@ public class GrupoDao {
                     + " DESCRICAOGRUPO FROM GRUPO ");
             while (rs.next()) {
                 grupo = new Grupo();
-                grupo.setIdgrupo(rs.getInt("IDGRUPO"));
-                grupo.setDescricaogrupo(rs.getString("DESCRICAOGRUPO"));
-                grupo.setTipousuario(rs.getString("TIPOUSUARIO"));
+                grupo.setIdGrupo(rs.getInt("IDGRUPO"));
+                grupo.setDescricaoGrupo(rs.getString("DESCRICAOGRUPO"));
+                grupo.setTipoUsuario(rs.getString("TIPOUSUARIO"));
 
                 lista.add(grupo);
             }
@@ -83,10 +83,10 @@ public class GrupoDao {
     public boolean updateGrupo(Grupo grupo) {
 
         String sql = "UPDATE GRUPO SET "
-                + "idgrupo=" + grupo.getIdgrupo()
-                + ",tipousuario= '" + grupo.getTipousuario()
-                + "',descricaogrupo='" + grupo.getDescricaogrupo()
-                + "' WHERE IDGRUPO = " + grupo.getIdgrupo();
+                + "idgrupo=" + grupo.getIdGrupo()
+                + ",tipousuario= '" + grupo.getTipoUsuario()
+                + "',descricaogrupo='" + grupo.getDescricaoGrupo()
+                + "' WHERE IDGRUPO = " + grupo.getIdGrupo();
 
         try {
             st.executeUpdate(sql);

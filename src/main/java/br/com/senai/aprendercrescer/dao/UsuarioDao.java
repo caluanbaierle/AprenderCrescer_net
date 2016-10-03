@@ -65,6 +65,7 @@ public class UsuarioDao {
             while (rs.next()) {
                 id = rs.getInt("IDUSUARIO");
             }
+            
             usuario.setIdUsuario(id);
             sql = "INSERT INTO usuario( idusuario, idgrupo, login, "
                     + "senhausuario, nomeusuario, dtalteracao, flaginativo)"
@@ -77,10 +78,10 @@ public class UsuarioDao {
                     + "', 'F' )";
             System.out.println(sql);
             st.execute(sql);
+            
             return true;
         } catch (SQLException ex) {
             System.out.println("Problema ao inserir usuario: " + ex);
-            JOptionPane.showMessageDialog(null, "Erro:" + ex);
         }
         return false;
     }

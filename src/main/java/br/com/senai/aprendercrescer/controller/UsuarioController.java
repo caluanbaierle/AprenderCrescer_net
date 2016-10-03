@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class UsuarioController {
 
     UsuarioDao usuarioDao;
+    
 
     public UsuarioController() {
         if (usuarioDao == null) {

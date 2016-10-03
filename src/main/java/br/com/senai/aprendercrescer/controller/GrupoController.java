@@ -27,7 +27,7 @@ public class GrupoController {
 
     public boolean insereGrupo(Grupo grupo) {
 
-        if (grupo.getIdgrupo() != 0) {
+        if (grupo.getIdGrupo()!= 0) {
             return grupoDao.updateGrupo(grupo);
         } else {
             return grupoDao.insereGrupo(grupo);

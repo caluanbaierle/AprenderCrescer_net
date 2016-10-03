@@ -94,7 +94,6 @@ public class UsuarioWs {
     @Produces("application/json")
     public Response setUsuario(InputStream dadosServ) {
         StringBuilder requisicaoFinal = new StringBuilder();
-        String batata = "";
         try {
             BufferedReader in
                     = new BufferedReader(
@@ -114,17 +113,19 @@ public class UsuarioWs {
             usuario.setSenha(resposta.getString("senha"));
             usuario.setIdGrupo(resposta.getInt("idGrupo"));
             usuario.setFlagInativo(resposta.getString("flagInativo").toCharArray()[0]);
-            
+
             if (new UsuarioController().insereUsuario(usuario)) {
-                Response.status(200).entity("{\"result\" : \"Cadastrado com Sucesso\"}").build();
+                return Response.status(200).
+                        entity("{\"result\""
+                                + " : \"Cadastrado\"}").build();
             } else {
-                Response.status(200).entity("{\"result\" : \"Erro no Cadastro\"}").build();
+                return Response.status(501)
+                        .entity("{\"result\" :"
+                                + " \"Erro no Cadastro\"}").build();
             }
         } catch (Exception ex) {
-            return Response.status(501).
+            return Response.status(400).
                     entity(ex.toString()).build();
         }
-        return null;
     }
-
 }
