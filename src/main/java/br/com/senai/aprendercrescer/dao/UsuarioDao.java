@@ -113,7 +113,7 @@ public class UsuarioDao {
         try {
             rs = st.executeQuery("SELECT  IDUSUARIO, IDGRUPO,LOGIN,"
                     + " SENHAUSUARIO, NOMEUSUARIO,DTALTERACAO,"
-                    + "FLAGINATIVO FROM USUARIO ");
+                    + "FLAGINATIVO FROM USUARIO ORDER BY  IDUSUARIO ");
             while (rs.next()) {
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("IDUSUARIO"));

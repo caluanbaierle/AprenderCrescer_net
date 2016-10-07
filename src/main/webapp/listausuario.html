@@ -10,13 +10,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script type="text/javaScript" 
-        src="vendor/js/angular.min.js"></script>
+        <link rel="stylesheet"  type="text/css" href="vendor/sweetalert/sweetalert.css">
 
+        
+        <script type="text/javaScript" src="vendor/js/angular.min.js"></script>
+        <script type="text/javaScript" src="vendor/sweetalert/sweetalert.min.js"></script>
+        
         <script type="text/javaScript" src="js/myApp.js"></script>
         <script type="text/javaScript" src="js/controller/UsuarioController.js"></script>
         <script type="text/javaScript" src="js/factory/UsuarioFactory.js"></script>
 
+        
+        
 
     </head>
     <body ng-controller="UsuarioController" ng-init="buscaUsuarios()">
@@ -77,7 +82,7 @@ and open the template in the editor.
                             <td>{{item.nome}}</td> 
                             <td>{{item.ativo}}</td> 
                             <td>
-                                <button ng-click="editarUsuario()">Editar</button>
+                                <button ng-click="editarUsuario(item)">Editar</button>
                                 <button>Remover</button>
                             </td>
                         </tr>
