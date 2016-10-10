@@ -33,5 +33,17 @@ myApp.factory('UsuarioFactory', ['$http', function($http){
                 callback(resposta);
             });
         },
+        deleteUsuario: function(callback, usuario){
+           $http({"method":"DELETE",
+                "url":"/AprenderCrescer/rest/usuario/deleteusuario",
+                "headers": {"Content-Type": "application/json"},
+                "data" : usuario
+                
+            }).then(function(resposta){
+                callback(resposta);
+            },function(resposta){
+                callback(resposta);
+            });
+        },
     };
 }]);

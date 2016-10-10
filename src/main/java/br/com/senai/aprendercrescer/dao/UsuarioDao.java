@@ -90,12 +90,12 @@ public class UsuarioDao {
         Date data = new Date();
         String sql = "UPDATE usuario SET "
                 + "idusuario=" + usuario.getIdUsuario() + ", "
-                + "idgrupo= 0 , "
+                + "idgrupo= "+usuario.getIdGrupo()+" , "
                 + "login='" + usuario.getLogin() + "',"
                 + "senhausuario='" + usuario.getSenha() + "', "
                 + "nomeusuario='" + usuario.getNome() + "',"
                 + "dtalteracao='" + data + "', "
-                + "flaginativo='F' "
+                + "flaginativo='"+usuario.getFlagInativo()+"' "
                 + "WHERE idusuario= " + usuario.getIdUsuario() + ";";
         try {
             st.executeUpdate(sql);
@@ -133,6 +133,7 @@ public class UsuarioDao {
     public boolean deleteUsuario(int id) {
         String sql = "DELETE FROM USUARIO WHERE IDUSUARIO = " + id;
         try {
+            System.out.println("DElete usuario = "+id);
             st.execute(sql);
             return true;
         } catch (SQLException ex) {
