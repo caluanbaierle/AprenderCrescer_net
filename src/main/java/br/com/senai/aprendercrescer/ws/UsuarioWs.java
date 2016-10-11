@@ -71,8 +71,8 @@ public class UsuarioWs {
                 jUsuario.put("idUsuario", usuario.getIdUsuario());
                 jUsuario.put("idGrupo", usuario.getIdGrupo());
                 jUsuario.put("login", usuario.getLogin());
-                jUsuario.put("senha", usuario.getSenha());
-                jUsuario.put("nome", usuario.getNome());
+                jUsuario.put("senha", usuario.getSenhaUsuario());
+                jUsuario.put("nome", usuario.getNomeUsuario());
                 jUsuario.put("flagInativo", usuario.getFlagInativo() + "");
                 retorno.append(jUsuario.toString());
                 controle = true;
@@ -110,10 +110,10 @@ public class UsuarioWs {
             Usuario usuario = new Usuario();
 
             usuario.setLogin(resposta.getString("login"));
-            usuario.setNome(resposta.getString("nome"));
-            usuario.setSenha(resposta.getString("senha"));
+            usuario.setNomeUsuario(resposta.getString("nome"));
+            usuario.setSenhaUsuario(resposta.getString("senha"));
             usuario.setIdGrupo(resposta.getInt("idGrupo"));
-            usuario.setFlagInativo(resposta.getString("flagInativo").toCharArray()[0]);
+            usuario.setFlagInativo(resposta.getString("flagInativo"));
 
             if (new UsuarioController().insereUsuario(usuario)) {
                 return Response.status(200).
@@ -152,10 +152,10 @@ public class UsuarioWs {
 
             usuario.setIdUsuario(resposta.getInt("idUsuario"));
             usuario.setLogin(resposta.getString("login"));
-            usuario.setNome(resposta.getString("nome"));
-            usuario.setSenha(resposta.getString("senha"));
+            usuario.setNomeUsuario(resposta.getString("nome"));
+            usuario.setSenhaUsuario(resposta.getString("senha"));
             usuario.setIdGrupo(resposta.getInt("idGrupo"));
-            usuario.setFlagInativo(resposta.getString("flagInativo").toCharArray()[0]);
+            usuario.setFlagInativo(resposta.getString("flagInativo"));
 
             if (new UsuarioController().insereUsuario(usuario)) {
                 return Response.status(200).

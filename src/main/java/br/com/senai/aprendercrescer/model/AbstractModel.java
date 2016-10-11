@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.senai.aprendercrescer.dao;
-
-import br.com.senai.aprendercrescer.model.Usuario;
+package br.com.senai.aprendercrescer.model;
 
 /**
  *
  * @author Caluan Baierle
  */
-public class UsuarioDao extends AbstractDao<Usuario>{
+public abstract class AbstractModel {
+    
+    public static final char TRUE = 'T';
+    public static final char FALSE = 'F';
+    
+    public abstract boolean isNew();
     
 }
