@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findBynomeUsuario", query = "SELECT u FROM Usuario u WHERE u.nomeUsuario = :nomeUsuario"),
     @NamedQuery(name = "Usuario.findBydtAlteracao", query = "SELECT u FROM Usuario u WHERE u.dtAlteracao = :dtAlteracao"),
     @NamedQuery(name = "Usuario.findByflagInativo", query = "SELECT u FROM Usuario u WHERE u.flagInativo = :flagInativo")})
-public class Usuario implements Serializable {
+public class Usuario extends AbstractModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -169,6 +169,11 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "br.com.senai.aprendercrescer.model.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @Override
+    public boolean isNew() {
+       if(idUsuario == null){return true;}else{return false;}
     }
     
 }

@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Conta.findByDescricao", query = "SELECT c FROM Conta c WHERE c.descricao = :descricao"),
     @NamedQuery(name = "Conta.findByTipoconta", query = "SELECT c FROM Conta c WHERE c.tipoConta = :tipoConta"),
     @NamedQuery(name = "Conta.findByValor", query = "SELECT c FROM Conta c WHERE c.valor = :valor")})
-public class Conta implements Serializable {
+public class Conta extends AbstractModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -123,6 +123,11 @@ public class Conta implements Serializable {
     @Override
     public String toString() {
         return "br.com.senai.aprendercrescer.model.Conta[ idConta=" + idConta + " ]";
+    }
+
+    @Override
+    public boolean isNew() {
+       if(idConta == null){return true;}else{return false;}
     }
     
 }

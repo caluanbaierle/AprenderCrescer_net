@@ -5,11 +5,9 @@
  */
 package br.com.senai.aprendercrescer.controller;
 
-
 import br.com.senai.aprendercrescer.dao.GrupoDao;
 import br.com.senai.aprendercrescer.model.Grupo;
 import java.util.ArrayList;
-
 
 /**
  *
@@ -26,22 +24,19 @@ public class GrupoController {
     }
 
     public boolean insereGrupo(Grupo grupo) {
-
-        if (grupo.getIdGrupo()!= 0) {
-            return grupoDao.updateGrupo(grupo);
-        } else {
-            return grupoDao.insereGrupo(grupo);
-        }
-
+        grupoDao.gravar(grupo);
+        return true;
     }
 
     public ArrayList<Grupo> getGrupos() {
-        return grupoDao.getGrupos();
+        return grupoDao.getAll();
     }
 
     public boolean deleteGrupo(int id) {
-
-        return grupoDao.deleteGrupo(id);
+        Grupo grupo = new Grupo();
+        grupo.setIdGrupo(id);
+        grupoDao.apagar(grupo);
+        return true;
     }
 
 }

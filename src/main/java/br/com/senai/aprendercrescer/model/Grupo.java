@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Grupo.findByIdgrupo", query = "SELECT g FROM Grupo g WHERE g.idgrupo = :idgrupo"),
     @NamedQuery(name = "Grupo.findByTipousuario", query = "SELECT g FROM Grupo g WHERE g.tipousuario = :tipousuario"),
     @NamedQuery(name = "Grupo.findByDescricaogrupo", query = "SELECT g FROM Grupo g WHERE g.descricaogrupo = :descricaogrupo")})
-public class Grupo implements Serializable {
+public class Grupo extends AbstractModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -96,6 +96,11 @@ public class Grupo implements Serializable {
     @Override
     public String toString() {
         return "br.com.senai.aprendercrescer.model.Grupo[ idgrupo=" + idGrupo + " ]";
+    }
+
+    @Override
+    public boolean isNew() {
+        if(idGrupo == null){return true;}else{return false;}
     }
     
 }
